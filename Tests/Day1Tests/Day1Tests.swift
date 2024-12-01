@@ -21,3 +21,8 @@ let testInput = """
   let part1 = try part1(testInput)
   #expect(part1 == 11)
 }
+
+@Test func part2_sample() throws {
+  let part2 = try part2(testInput)
+  #expect(part2 == 31)
+}

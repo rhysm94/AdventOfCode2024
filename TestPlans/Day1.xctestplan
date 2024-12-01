@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "5A26890E-5DFE-4813-ACDD-8A790DA87742",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Day1Tests",
+        "name" : "Day1Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
