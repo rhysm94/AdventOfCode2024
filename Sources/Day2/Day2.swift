@@ -20,37 +20,37 @@ public struct Day2 {
 
 func part1(_ string: String) throws -> Int {
   let parsed = try ReportsParser().parse(string)
-  return parsed.count(where: { $0.safety == .safe })
+  return parsed.count(where: { safety(for: $0) == .safe })
+}
+
+func safety(for report: Report) -> Report.Safety {
+  var lastDirection: Report.Direction?
+
+  for (one, two) in zip(report.levels, report.levels.dropFirst()) {
+    let difference = one - two
+
+    if !(1 ... 3).contains(abs(difference)) {
+      return .unsafe
+    }
+
+    let direction: Report.Direction = if difference > 0 {
+      .incremented
+    } else {
+      .decremented
+    }
+
+    if let lastDirection, lastDirection != direction {
+      return .unsafe
+    }
+
+    lastDirection = direction
+  }
+
+  return .safe
 }
 
 struct Report {
   let levels: [Int]
-
-  var safety: Safety {
-    var lastDirection: Direction?
-
-    for (one, two) in zip(levels, levels.dropFirst()) {
-      let difference = one - two
-
-      if !(1 ... 3).contains(abs(difference)) {
-        return .unsafe
-      }
-
-      let direction: Direction = if difference > 0 {
-        .incremented
-      } else {
-        .decremented
-      }
-
-      if let lastDirection, lastDirection != direction {
-        return .unsafe
-      }
-
-      lastDirection = direction
-    }
-
-    return .safe
-  }
 
   enum Safety {
     case safe
@@ -70,6 +70,8 @@ struct ReportParser: Parser {
         Int.parser()
       } separator: {
         Whitespace(.horizontal)
+      } terminator: {
+        Whitespace(1, .vertical)
       }
     }
   }
@@ -79,10 +81,8 @@ struct ReportsParser: Parser {
   var body: some Parser<Substring, [Report]> {
     Many {
       ReportParser()
-    } separator: {
-      Whitespace(1, .vertical)
     } terminator: {
-      Whitespace(1, .vertical)
+      Whitespace()
     }
   }
 }
