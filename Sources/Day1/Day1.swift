@@ -7,15 +7,12 @@
 
 import Foundation
 import Parsing
+import Utils
 
 @main
 public struct Day1 {
   public static func main() throws {
-    guard let data = Bundle.module.url(forResource: "input", withExtension: "txt") else {
-      return
-    }
-
-    let input = try String(contentsOf: data, encoding: .utf8)
+    let input = try Bundle.module.inputString()
 
     let part1Result = try part1(input)
     print("Part 1: \(part1Result)")
@@ -72,9 +69,9 @@ struct ElementsParser: Parser {
     Many {
       ElementParser()
     } separator: {
-      "\n"
+      Whitespace()
+    } terminator: {
+      Whitespace()
     }
-
-    "\n"
   }
 }

@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "798410C7-B32A-417A-B302-4D1735BF5255",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Day2Tests",
+        "name" : "Day2Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
