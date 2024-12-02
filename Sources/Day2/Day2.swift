@@ -20,33 +20,39 @@ public struct Day2 {
 
 func part1(_ string: String) throws -> Int {
   let parsed = try ReportsParser().parse(string)
-  return parsed.count(where: { safety(for: $0) == .safe })
+  let safe = parsed.map(safety).map(\.incidentCount).count(where: { $0 == 0 })
+  return safe
 }
 
-func safety(for report: Report) -> Report.Safety {
-  var lastDirection: Report.Direction?
+struct SafetyCounter {
+  var direction: Report.Direction?
+  var incidentCount: Int = 0
+}
 
-  for (one, two) in zip(report.levels, report.levels.dropFirst()) {
-    let difference = one - two
+func safety(for report: Report) -> SafetyCounter {
+  zip(report.levels, report.levels.dropFirst())
+    .reduce(into: SafetyCounter()) { counter, next in
+      let (one, two) = next
+      let difference = one - two
+      
+      if !(1 ... 3).contains(abs(difference)) {
+        counter.incidentCount += 1
+        return
+      }
 
-    if !(1 ... 3).contains(abs(difference)) {
-      return .unsafe
+      let direction: Report.Direction = if difference > 0 {
+        .incremented
+      } else {
+        .decremented
+      }
+
+      if let lastDirection = counter.direction, lastDirection != direction {
+        counter.incidentCount += 1
+        return
+      }
+
+      counter.direction = direction
     }
-
-    let direction: Report.Direction = if difference > 0 {
-      .incremented
-    } else {
-      .decremented
-    }
-
-    if let lastDirection, lastDirection != direction {
-      return .unsafe
-    }
-
-    lastDirection = direction
-  }
-
-  return .safe
 }
 
 struct Report {
