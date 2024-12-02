@@ -12,8 +12,10 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.13.0")
   ],
-  targets:
-    day(1) +
+  targets: [
+    .target(name: "Utils")
+  ] +
+  day(1) +
   day(2, hasResources: false)
 )
 
@@ -26,7 +28,8 @@ func day(
     .executableTarget(
       name: "Day\(day)",
       dependencies: [
-        .product(name: "Parsing", package: "swift-parsing")
+        .product(name: "Parsing", package: "swift-parsing"),
+        "Utils"
       ] + dependencies,
       resources: hasResources ? [.copy("input.txt")] : []
     ),
