@@ -72,9 +72,9 @@ struct ElementsParser: Parser {
     Many {
       ElementParser()
     } separator: {
-      "\n"
+      Whitespace()
+    } terminator: {
+      Whitespace()
     }
-
-    "\n"
   }
 }
