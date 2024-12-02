@@ -12,11 +12,9 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.13.0")
   ],
-  targets: [
-    .target(name: "Utils")
-  ] +
+  targets: [.target(name: "Utils")] +
   day(1) +
-  day(2, hasResources: false)
+  day(2)
 )
 
 func day(

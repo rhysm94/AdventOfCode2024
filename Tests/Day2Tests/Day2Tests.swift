@@ -18,7 +18,8 @@ let testInput = """
 """
 
 @Test func part1_sample() throws {
-  Issue.record("Not implemented")
+  let part1 = try part1(testInput)
+  #expect(part1 == 2)
 }
 
 @Test func part2_sample() throws {
