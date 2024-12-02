@@ -15,6 +15,7 @@ let testInput = """
 1 3 2 4 5
 8 6 4 4 1
 1 3 6 7 9
+
 """
 
 @Test func part1_sample() throws {
@@ -23,5 +24,6 @@ let testInput = """
 }
 
 @Test func part2_sample() throws {
-  Issue.record("Not implemented")
+  let part2 = try part2(testInput)
+  #expect(part2 == 4)
 }
