@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "CE1EE320-FC58-486E-9469-E1743DD5A5E7",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Day3Tests",
+        "name" : "Day3Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
